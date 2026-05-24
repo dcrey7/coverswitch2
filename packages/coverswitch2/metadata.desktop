@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Cover Switch 2
+Comment=GNOME-styled 3D carousel window switcher with panel-aware geometry
+Icon=preferences-system-windows-effect-coverswitch
+
+X-Plasma-API=declarativeappletscript
+X-Plasma-MainScript=ui/main.qml
+
+X-KDE-PluginInfo-Author=Ismael Asensio, dcrey7
+X-KDE-PluginInfo-Email=isma.af@gmail.com, abhishek01789@gmail.com
+X-KDE-PluginInfo-Name=coverswitch2
+X-KDE-PluginInfo-Version=1.0
+
+X-KDE-PluginInfo-License=GPL
+X-KDE-ServiceTypes=KWin/WindowSwitcher
+Type=Service

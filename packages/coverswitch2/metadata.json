@@ -1,0 +1,18 @@
+{
+    "KPackageStructure": "KWin/WindowSwitcher",
+    "KPlugin": {
+        "Authors": [
+            { "Email": "isma.af@gmail.com", "Name": "Ismael Asensio" },
+            { "Email": "abhishek01789@gmail.com", "Name": "dcrey7" }
+        ],
+        "Description": "GNOME-styled Cover Flow window switcher with panel-aware geometry and morph animations",
+        "Icon": "preferences-system-windows-effect-coverswitch",
+        "Id": "coverswitch2",
+        "License": "GPL",
+        "Name": "Cover Switch 2",
+        "ServiceTypes": ["KWin/WindowSwitcher"],
+        "Version": "1.0"
+    },
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-MainScript": "ui/main.qml"
+}

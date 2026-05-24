@@ -1,0 +1,20 @@
+{
+    "KPackageStructure": "KWin/Effect",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "abhishek01789@gmail.com",
+                "Name": "dcrey7"
+            }
+        ],
+        "Category": "Window Open/Close Animation",
+        "Description": "Zoom-in animation when activating a window via Cover Switch 2 Alt+Tab",
+        "EnabledByDefault": true,
+        "Id": "coverswitch2-zoom-in",
+        "License": "GPL",
+        "Name": "Cover Switch 2 Zoom-In",
+        "Version": "1.0"
+    },
+    "X-Plasma-API": "javascript",
+    "X-Plasma-MainScript": "code/main.js"
+}
