@@ -4,7 +4,7 @@ Cover Switch 2 is a Plasma 6 Alt+Tab task switcher with a GNOME-style cover-flow
 
 ![Cover Switch 2 demo](media/coverswitch2-demo.gif)
 
-Unlike the stock Cover Switch, the panel/taskbar and wallpaper stay visible during Alt+Tab, with no black edges on multi-monitor or extended-display setups. A side-by-side comparison clip is in [`media/coverswitch2-comparison.mp4`](media/coverswitch2-comparison.mp4).
+Unlike the stock Cover Switch, the panel/taskbar and wallpaper stay visible during Alt+Tab, with no black edges on multi-monitor or extended-display setups. It also wraps cyclically — once you reach the last window it loops straight back to the first (and vice versa), instead of stopping dead at the end like the stock switcher. A side-by-side comparison clip is in [`media/coverswitch2-comparison.mp4`](media/coverswitch2-comparison.mp4).
 
 It is split into two KDE packages:
 
@@ -22,7 +22,21 @@ Tested locally on:
 - CachyOS
 - 2560x1440 external display at 144 Hz
 
-## Install From Source
+## Quick install (recommended)
+
+```bash
+git clone https://github.com/dcrey7/coverswitch2.git
+cd coverswitch2
+./install.sh
+```
+
+`install.sh` installs both packages, sets Cover Switch 2 as your Alt+Tab layout, enables the zoom-in effect, and reloads KWin. It is idempotent, so you can re-run it after an update. To remove everything cleanly (and restore the default Alt+Tab switcher):
+
+```bash
+./uninstall.sh
+```
+
+## Manual install (alternative)
 
 ```bash
 kpackagetool6 --type KWin/WindowSwitcher --install packages/coverswitch2
@@ -67,6 +81,10 @@ Both packages keep verbose debug logging disabled by default.
 ## Attribution
 
 The task switcher is based on the Cover Switch QML rewrite by Ismael Asensio and has been modified for Plasma 6 with panel-aware geometry and additional animations by dcrey7.
+
+## Issues / contact
+
+Found a bug or have a question? Open an issue on this repo, or email **abhishek01789@gmail.com**.
 
 ## License
 
