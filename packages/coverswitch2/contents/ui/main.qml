@@ -7,6 +7,7 @@
 
 import QtQuick
 import QtQuick.Window
+import QtQuick.Effects
 
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PC3
@@ -21,6 +22,11 @@ KWin.TabBoxSwitcher {
     property int panelReserve: fallbackPanelReserve
     property bool correctingCurrentIndex: false
     property bool tabBoxApiDumped: false
+
+    // Frosted backdrop: blur the desktop wallpaper behind the cards.
+    // Set backgroundBlur=false to fall back to the plain (sharp) wallpaper.
+    readonly property bool backgroundBlur: true
+    readonly property int backgroundBlurMax: 32
 
     readonly property int rawScreenWidth: Math.max(Screen.width, tabBox.screenGeometry.width)
     readonly property int rawScreenHeight: Math.max(Screen.height, tabBox.screenGeometry.height)
@@ -331,12 +337,19 @@ KWin.TabBoxSwitcher {
             return
         }
 
+        var isWrap = (fromIndex === thumbnailView.count - 1 && toIndex === 0)
+                  || (fromIndex === 0 && toIndex === thumbnailView.count - 1)
         var distance = highlightMoveDistance(fromIndex, toIndex)
-        var duration = distance > 1
-                ? Math.max(thumbnailView.baseHighlightMoveDuration, distance * 110)
-                : thumbnailView.baseHighlightMoveDuration
+        var duration
+        if (isWrap) {
+            duration = thumbnailView.baseWrapDuration
+        } else if (distance > 1) {
+            duration = Math.max(thumbnailView.baseHighlightMoveDuration, distance * 110)
+        } else {
+            duration = thumbnailView.baseHighlightMoveDuration
+        }
         thumbnailView.highlightMoveDuration = duration
-        thumbnailView.wrapInProgress = distance > 1
+        thumbnailView.wrapInProgress = isWrap
         highlightDurationResetTimer.interval = duration + 50
         highlightDurationResetTimer.restart()
     }
@@ -441,6 +454,26 @@ KWin.TabBoxSwitcher {
             }
         }
 
+        // Frosted blur over the wallpaper. Sits above the sharp DesktopBackground
+        // (z -10) and below the dim overlay + cards. Rendered 1:1 with the wallpaper
+        // (no scaling) so it lines up exactly; any softness at the very edge only
+        // reveals the identical, perfectly-aligned sharp DesktopBackground beneath it,
+        // never a black border — so no overscan is needed.
+        MultiEffect {
+            id: backgroundBlurEffect
+            visible: tabBox.backgroundBlur
+            source: desktopBackground
+            x: 0
+            y: 0
+            width: Screen.width
+            height: Screen.height
+            autoPaddingEnabled: false
+            blurEnabled: true
+            blur: 1.0
+            blurMax: tabBox.backgroundBlurMax
+            z: -9.5
+        }
+
         Item {
             id: fader
             anchors.fill: parent
@@ -471,6 +504,9 @@ KWin.TabBoxSwitcher {
                 preferredHighlightEnd: 0.5
                 highlightRangeMode: PathView.StrictlyEnforceRange
                 readonly property int baseHighlightMoveDuration: 220
+                // Wrap (last->first / first->last) is a single loop-around step, so
+                // keep it short and snappy instead of scaling by the stack size.
+                readonly property int baseWrapDuration: 150
                 property bool wrapInProgress: false
                 property real activeOvershoot: 1.7
                 highlightMoveDuration: baseHighlightMoveDuration

@@ -1,10 +1,10 @@
 # Cover Switch 2
 
-Cover Switch 2 is a Plasma 6 Alt+Tab task switcher with a GNOME-style cover-flow layout, panel-aware geometry, open morph animation, cyclic wrap navigation, and an optional zoom-in activation effect.
+Cover Switch 2 is a Plasma 6 Alt+Tab task switcher with a GNOME-style cover-flow layout, panel-aware geometry, a frosted blurred backdrop, open morph animation, cyclic wrap navigation, and an optional zoom-in activation effect.
 
 ![Cover Switch 2 demo](media/coverswitch2-demo.gif)
 
-Unlike the stock Cover Switch, the panel/taskbar and wallpaper stay visible during Alt+Tab, with no black edges on multi-monitor or extended-display setups. It also wraps cyclically — once you reach the last window it loops straight back to the first (and vice versa), instead of stopping dead at the end like the stock switcher. A side-by-side comparison clip is in [`media/coverswitch2-comparison.mp4`](media/coverswitch2-comparison.mp4).
+Unlike the stock Cover Switch, the panel/taskbar stays visible during Alt+Tab, with no black edges on multi-monitor or extended-display setups, and the wallpaper is softly blurred behind the cards. It also wraps cyclically — once you reach the last window it loops straight back to the first (and vice versa) with a quick snap, instead of stopping dead at the end like the stock switcher. A side-by-side comparison clip is in [`media/coverswitch2-comparison.mp4`](media/coverswitch2-comparison.mp4).
 
 It is split into two KDE packages:
 
